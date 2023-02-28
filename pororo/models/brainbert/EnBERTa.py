@@ -37,8 +37,11 @@ class CustomRobertaModel(RobertaModel):
 class CustomRobertaHubInterface(RobertaHubInterface):
 
     def __init__(self, args, task, model):
-        args.gpt2_encoder_json = download_or_load("misc/encoder.json", "en")
-        args.gpt2_vocab_bpe = download_or_load("misc/vocab.bpe", "en")
+        from omegaconf import open_dict
+        with open_dict(args):
+            # fix: https://github.com/facebookresearch/hydra/issues/258
+            args.gpt2_encoder_json = download_or_load("misc/encoder.json", "en")
+            args.gpt2_vocab_bpe = download_or_load("misc/vocab.bpe", "en")
         super().__init__(args, task, model)
         self.softmax = nn.Softmax(dim=1)
 
