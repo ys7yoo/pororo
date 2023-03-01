@@ -7,7 +7,10 @@ from abc import abstractmethod
 from typing import List, Optional
 from unicodedata import normalize
 
-from kss import split_sentences
+try:
+    from kss import split_sentences
+except:
+    print("Cannot import kss")
 
 from pororo.tasks.utils.base import PororoFactoryBase, PororoSimpleBase
 from pororo.tasks.utils.download_utils import download_or_load

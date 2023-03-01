@@ -5,8 +5,10 @@ from typing import Dict, Union
 import torch
 from fairseq.models.roberta import RobertaModel
 from fairseq.models.roberta.hub_interface import RobertaHubInterface
-from transformers import BertJapaneseTokenizer
-
+try:
+    from transformers import BertJapaneseTokenizer
+except:
+    print("Cannot import BertJapaneseTokenizer")
 from pororo.models.brainbert.utils import softmax
 from pororo.tasks.utils.download_utils import download_or_load
 
